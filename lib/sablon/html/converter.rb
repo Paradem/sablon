@@ -95,6 +95,12 @@ module Sablon
       elsif node.name =~ /h(\d+)/
         @builder.new_layer
         @builder.emit Paragraph.new("Heading#{$1}", ast_text(node.children))
+      elsif node.name == 'cablegram'
+        @builder.new_layer
+        @builder.emit Paragraph.new('Cablegram', ast_text(node.children))
+      elsif node.name == 'ref-block'
+        @builder.new_layer
+        @builder.emit Paragraph.new('Reference', ast_text(node.children))
       elsif node.name == 'ul'
         @builder.new_layer ilvl: true
         unless @builder.nested?
@@ -121,15 +127,19 @@ module Sablon
       runs = nodes.flat_map do |node|
         if node.text?
           Text.new(node.text, format)
+        elsif node.name == 'span'
+          Text.new(node.text, format)
         elsif node.name == 'br'
           Newline.new
+        elsif node.name == 'no-quotation'
+          Text.new(node.children.first.text, TextFormat.with_gray)
         elsif node.name == 'strong' || node.name == 'b'
           ast_text(node.children, format: format.with_bold).nodes
         elsif node.name == 'em' || node.name == 'i'
           ast_text(node.children, format: format.with_italic).nodes
         elsif node.name == 'u'
           ast_text(node.children, format: format.with_underline).nodes
-        elsif ['ul', 'ol', 'p', 'div'].include?(node.name)
+        elsif ['ul', 'ol', 'p', 'div', 'cablegram'].include?(node.name)
           @builder.push(node)
           nil
         else

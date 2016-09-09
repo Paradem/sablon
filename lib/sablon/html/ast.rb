@@ -99,10 +99,11 @@ XML
     end
 
     class TextFormat
-      def initialize(bold, italic, underline)
+      def initialize(bold, italic, underline, gray)
         @bold = bold
         @italic = italic
         @underline = underline
+        @gray = gray
       end
 
       def inspect
@@ -117,6 +118,7 @@ XML
         styles = []
         styles << '<w:b />' if @bold
         styles << '<w:i />' if @italic
+        styles << '<w:color w:val="a9a9a9" />' if @gray
         styles << '<w:u w:val="single"/>' if @underline
         if styles.any?
           "<w:rPr>#{styles.join}</w:rPr>"
@@ -125,20 +127,24 @@ XML
         end
       end
 
+      def self.with_gray
+        TextFormat.new(false, false, false, true)
+      end
+
       def self.default
-        @default ||= new(false, false, false)
+        @default ||= new(false, false, false, false)
       end
 
       def with_bold
-        TextFormat.new(true, @italic, @underline)
+        TextFormat.new(true, @italic, @underline, false)
       end
 
       def with_italic
-        TextFormat.new(@bold, true, @underline)
+        TextFormat.new(@bold, true, @underline, false)
       end
 
       def with_underline
-        TextFormat.new(@bold, @italic, true)
+        TextFormat.new(@bold, @italic, true, false)
       end
     end
 
