@@ -127,7 +127,7 @@ module Sablon
       runs = nodes.flat_map do |node|
         if node.text?
           Text.new(node.text, format)
-        elsif node.name == 'span'
+        elsif node.name == 'span' || node.name == 'sup'
           Text.new(node.text, format)
         elsif node.name == 'br'
           Newline.new
