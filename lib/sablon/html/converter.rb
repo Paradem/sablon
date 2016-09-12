@@ -98,6 +98,9 @@ module Sablon
       elsif node.name == 'cablegram'
         @builder.new_layer
         @builder.emit Paragraph.new('Cablegram', ast_text(node.children))
+      elsif node.name == 'center'
+        @builder.new_layer
+        @builder.emit Paragraph.new('NormalCenter', ast_text(node.children))
       elsif node.name == 'ref-block'
         @builder.new_layer
         @builder.emit Paragraph.new('Reference', ast_text(node.children))
