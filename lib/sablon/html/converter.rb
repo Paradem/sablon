@@ -134,6 +134,8 @@ module Sablon
           Text.new(node.text, format)
         elsif node.name == 'br'
           Newline.new
+        elsif node.name == 'no-quotation-underline'
+          Text.new(node.children.first.text, TextFormat.with_gray_underline)
         elsif node.name == 'no-quotation'
           Text.new(node.children.first.text, TextFormat.with_gray)
         elsif node.name == 'strong' || node.name == 'b'

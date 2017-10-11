@@ -131,6 +131,10 @@ XML
         TextFormat.new(false, false, false, true)
       end
 
+      def self.with_gray_underline
+        TextFormat.new(false, false, true, true)
+      end
+
       def self.default
         @default ||= new(false, false, false, false)
       end
