@@ -15,7 +15,7 @@ GEM
       pkg-config (~> 1.1.7)
     pkg-config (1.1.7)
     rake (10.4.2)
-    rubyzip (1.2.0)
+    rubyzip (2.3.0)
     xml-simple (1.1.5)
 
 PLATFORMS
