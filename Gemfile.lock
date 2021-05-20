@@ -8,12 +8,12 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    mini_portile2 (2.1.0)
+    mini_portile2 (2.5.1)
     minitest (5.8.0)
-    nokogiri (1.6.8)
-      mini_portile2 (~> 2.1.0)
-      pkg-config (~> 1.1.7)
-    pkg-config (1.1.7)
+    nokogiri (1.11.5)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
+    racc (1.5.2)
     rake (10.4.2)
     rubyzip (1.2.0)
     xml-simple (1.1.5)
